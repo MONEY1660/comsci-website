@@ -1,11 +1,27 @@
-from django.shortcuts import render, HttpResponse
+from datetime import date
+
+from django.shortcuts import render
 
 
 def index(request):
-    return render(request, 'index.html')
+    context = {
+        'title': 'Home Page',
+        'date': date.today(),
+    }
+    return render(request, 'index.html', context)
+
 
 def about(request):
-    return render(request, 'about.html')
+    context = {
+        'title': 'About Page',
+        'date': date.today(),
+    }
+    return render(request, 'about.html', context)
+
 
 def contact(request):
-    return render(request, 'contact.html')
+    context = {
+        'title': 'Contact Page',
+        'date': date.today(),
+    }
+    return render(request, 'contact.html', context)
