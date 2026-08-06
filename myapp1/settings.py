@@ -31,8 +31,8 @@ def load_environment_variables():
         key, value = line.split('=', 1)
         key = key.strip()
         value = value.strip().strip("'\"")
-        if key and key not in os.environ:
-            os.environ[key] = value
+        if key:
+            os.environ.setdefault(key, value)
 
 
 load_environment_variables()
