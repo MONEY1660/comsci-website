@@ -47,7 +47,34 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-development-ke
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() in ('1', 'true', 'yes', 'on')
 
-ALLOWED_HOSTS = [host.strip() for host in os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',') if host.strip()]
+
+def get_allowed_hosts():
+    hosts = [
+        host.strip()
+        for host in os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+        if host.strip()
+    ]
+
+    for env_name in ("VERCEL_URL", "WEBSITE_HOSTNAME"):
+        host = os.environ.get(env_name)
+        if host and host not in hosts:
+            hosts.append(host)
+
+    return hosts
+
+
+ALLOWED_HOSTS = get_allowed_hosts()
+CSRF_TRUSTED_ORIGINS = []
+for host in ALLOWED_HOSTS:
+    if host in {"localhost", "127.0.0.1"}:
+        CSRF_TRUSTED_ORIGINS.extend([f"http://{host}", f"https://{host}"])
+    elif host.startswith("."):
+        CSRF_TRUSTED_ORIGINS.append(f'https://{host.lstrip(".")}')
+    else:
+        CSRF_TRUSTED_ORIGINS.append(f"https://{host}")
+
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+USE_X_FORWARDED_HOST = True
 
 
 # Application definition
