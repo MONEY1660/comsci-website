@@ -12,21 +12,42 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 import os
 from pathlib import Path
+from urllib.parse import parse_qs, urlparse
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+def load_environment_variables():
+    env_file = BASE_DIR / '.env'
+    if not env_file.exists() or not env_file.is_file():
+        return
+
+    for line in env_file.read_text(encoding='utf-8').splitlines():
+        line = line.strip()
+        if not line or line.startswith('#') or '=' not in line:
+            continue
+
+        key, value = line.split('=', 1)
+        key = key.strip()
+        value = value.strip().strip("'\"")
+        if key and key not in os.environ:
+            os.environ[key] = value
+
+
+load_environment_variables()
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-2wn7(c33=%k#nrh_(naerq_ask7c=%s+iorbn3ke^-h1oid1(g'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-development-key-change-this-in-production')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', 'True') != 'False'
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() in ('1', 'true', 'yes', 'on')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [host.strip() for host in os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',') if host.strip()]
 
 
 # Application definition
@@ -75,12 +96,46 @@ WSGI_APPLICATION = 'myapp1.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3')
+
+if DATABASE_URL.startswith('sqlite'):
+    parsed_db = urlparse(DATABASE_URL)
+    sqlite_path = parsed_db.path.lstrip('/')
+
+    if sqlite_path:
+        if os.path.isabs(sqlite_path):
+            sqlite_name = sqlite_path
+        else:
+            sqlite_name = str(BASE_DIR / sqlite_path)
+    else:
+        sqlite_name = str(BASE_DIR / 'db.sqlite3')
+
+    Path(sqlite_name).parent.mkdir(parents=True, exist_ok=True)
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': sqlite_name,
+        }
     }
-}
+else:
+    parsed_db = urlparse(DATABASE_URL)
+    query_params = parse_qs(parsed_db.query)
+    sslmode = query_params.get('sslmode', ['require'])[0]
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': parsed_db.path.lstrip('/'),
+            'USER': parsed_db.username,
+            'PASSWORD': parsed_db.password,
+            'HOST': parsed_db.hostname,
+            'PORT': parsed_db.port or 5432,
+            'OPTIONS': {
+                'sslmode': sslmode,
+            },
+        }
+    }
 
 
 # Password validation

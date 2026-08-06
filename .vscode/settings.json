@@ -1,5 +1,6 @@
 {
-    "editor.formatOnSave": true,
-    "editor.formatOnSaveMode": "file",
-    "djlint.showInstallError": false
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "modifications",
+  "editor.defaultFormatter": null,
+  "djlint.showInstallError": false
 }

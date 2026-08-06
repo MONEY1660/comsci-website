@@ -1,16 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}{{ title }}{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block content %}
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">{{ title }}</h1>
-    <span class="text-muted">Today: {{ date }}</span>
-</div>
-
 <div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Student List</h6>
+    </div>
     <div class="card-body">
-        <p class="mb-0">Welcome to the homepage. This page is now showing the title and date from the view.</p>
+        <p class="mb-0">Welcome to the homepage.</p>
     </div>
 </div>
 {% endblock %}
