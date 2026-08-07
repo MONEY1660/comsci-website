@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-label="Rocket illustration">
+  <rect width="320" height="320" rx="28" fill="#eef2ff"/>
+  <circle cx="160" cy="150" r="86" fill="#4f46e5" opacity="0.12"/>
+  <path d="M160 72c-28 19-47 54-47 94 0 14 3 27 8 39l39-18 39 18c5-12 8-25 8-39 0-40-19-75-47-94Z" fill="#4f46e5"/>
+  <path d="M131 200h58l-9 28h-40z" fill="#312e81"/>
+  <path d="M130 83c16-12 34-14 50-8l-10 25c-14-4-31-2-45 8l5-25Z" fill="#f59e0b"/>
+  <path d="M140 99c-17 8-34 22-44 40l18 8c8-12 19-21 31-28l-5-20Z" fill="#fbbf24"/>
+  <path d="M180 99c17 8 34 22 44 40l-18 8c-8-12-19-21-31-28l5-20Z" fill="#fbbf24"/>
+</svg>

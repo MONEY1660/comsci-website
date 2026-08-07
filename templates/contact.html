@@ -1,20 +1,101 @@
 {% extends 'base.html' %}
 
-{% block title %}Contact{% endblock %}
+{% block title %}Contact Us - Django Application{% endblock %}
+
+{% block header_title %}Contact & Support{% endblock %}
 
 {% block content %}
-<header>
-  <nav>
-    <a href="/">Home</a>
-    <a href="/about/">About</a>
-    <a href="/contact/">Contact</a>
-  </nav>
-</header>
-<main>
-  <h1>Contact</h1>
-  <p>Contact us at info@example.com.</p>
-</main>
-<footer>
-  © 2026 My Django Site
-</footer>
+<div class="row">
+    <!-- Contact Form Card -->
+    <div class="col-lg-7 mb-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-paper-plane mr-1"></i> Send Us a Message
+                </h6>
+            </div>
+            <div class="card-body">
+                <div id="contactAlert" class="alert alert-success d-none" role="alert">
+                    <i class="fas fa-check-circle mr-1"></i> Thank you! Your message has been submitted successfully.
+                </div>
+                <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="contactName" class="font-weight-bold">Your Name</label>
+                            <input type="text" class="form-control" id="contactName" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="contactEmail" class="font-weight-bold">Email Address</label>
+                            <input type="email" class="form-control" id="contactEmail" placeholder="john@example.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactSubject" class="font-weight-bold">Subject</label>
+                        <input type="text" class="form-control" id="contactSubject" placeholder="Inquiry about project..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage" class="font-weight-bold">Message</label>
+                        <textarea class="form-control" id="contactMessage" rows="4" placeholder="Type your message here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block shadow-sm">
+                        <i class="fas fa-paper-plane mr-1"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Info Cards -->
+    <div class="col-lg-5 mb-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-address-card mr-1"></i> Contact Details
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="btn btn-primary btn-circle mr-3">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                        <div class="small text-gray-500">Email Support</div>
+                        <div class="font-weight-bold">support@example.com</div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <div class="btn btn-success btn-circle mr-3">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div>
+                        <div class="small text-gray-500">Deployment Platform</div>
+                        <div class="font-weight-bold">Vercel Cloud Serverless</div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <div class="btn btn-info btn-circle mr-3">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <div class="small text-gray-500">System Time</div>
+                        <div class="font-weight-bold">{{ date }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function handleContactSubmit(event) {
+        event.preventDefault();
+        $('#contactAlert').removeClass('d-none');
+        $('#contactForm')[0].reset();
+        setTimeout(function() {
+            $('#contactAlert').addClass('d-none');
+        }, 5000);
+    }
+</script>
 {% endblock %}

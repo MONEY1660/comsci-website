@@ -1,20 +1,58 @@
 {% extends 'base.html' %}
 
-{% block title %}About{% endblock %}
+{% block title %}About Us - Django Application{% endblock %}
+
+{% block header_title %}About This Project{% endblock %}
 
 {% block content %}
-<header>
-  <nav>
-    <a href="/">Home</a>
-    <a href="/about/">About</a>
-    <a href="/contact/">Contact</a>
-  </nav>
-</header>
-<main>
-  <h1>About</h1>
-  <p>This is the about page.</p>
-</main>
-<footer>
-  © 2026 My Django Site
-</footer>
+<div class="row">
+    <!-- Project Info Card -->
+    <div class="col-lg-7 mb-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-info-circle mr-1"></i> Application Overview
+                </h6>
+            </div>
+            <div class="card-body">
+                <p>Welcome to <strong>Django Student Management Web App</strong>. This system is designed as a modern, scalable web application built with Django and optimized for serverless deployment on <strong>Vercel</strong>.</p>
+                <p>Features include dynamic template rendering using SB Admin 2, student data management with PostgreSQL/SQLite, security optimizations for CSRF & CORS, and static file serving using WhiteNoise.</p>
+                <hr>
+                <h6 class="font-weight-bold text-dark">Key Highlights:</h6>
+                <ul class="mb-0">
+                    <li><strong>Serverless Architecture:</strong> Optimized for Vercel Python runtime using WSGI entrypoints.</li>
+                    <li><strong>Database Flexibility:</strong> Support for local SQLite development & cloud PostgreSQL (Neon).</li>
+                    <li><strong>Responsive UI:</strong> Built with Bootstrap 4 & SB Admin 2 design tokens.</li>
+                    <li><strong>WhiteNoise Integration:</strong> Fast static asset compression & delivery.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tech Stack Summary -->
+    <div class="col-lg-5 mb-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-layer-group mr-1"></i> Technology Stack
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <span class="badge badge-primary p-2 mr-2 mb-2"><i class="fab fa-python mr-1"></i> Python 3.12+</span>
+                    <span class="badge badge-success p-2 mr-2 mb-2"><i class="fas fa-server mr-1"></i> Django 6.0</span>
+                    <span class="badge badge-info p-2 mr-2 mb-2"><i class="fas fa-database mr-1"></i> PostgreSQL / Neon</span>
+                    <span class="badge badge-dark p-2 mr-2 mb-2"><i class="fas fa-cloud mr-1"></i> Vercel Serverless</span>
+                    <span class="badge badge-secondary p-2 mr-2 mb-2"><i class="fas fa-feather-alt mr-1"></i> WhiteNoise</span>
+                    <span class="badge badge-danger p-2 mr-2 mb-2"><i class="fab fa-bootstrap mr-1"></i> SB Admin 2</span>
+                </div>
+                <hr>
+                <div class="small text-muted">
+                    <p class="mb-1"><strong>Environment:</strong> Development & Production Ready</p>
+                    <p class="mb-1"><strong>Server Date:</strong> {{ date }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -51,24 +51,30 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() in ('1', 'true', 'yes', '
 def get_allowed_hosts():
     hosts = [
         host.strip()
-        for host in os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+        for host in os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1,.vercel.app").split(",")
         if host.strip()
     ]
 
     for env_name in ("VERCEL_URL", "WEBSITE_HOSTNAME"):
         host = os.environ.get(env_name)
-        if host and host not in hosts:
-            hosts.append(host)
+        if host:
+            clean_host = host.replace("https://", "").replace("http://", "").split("/")[0]
+            if clean_host not in hosts:
+                hosts.append(clean_host)
 
     return hosts
 
 
 ALLOWED_HOSTS = get_allowed_hosts()
-CSRF_TRUSTED_ORIGINS = []
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.vercel.app",
+]
 for host in ALLOWED_HOSTS:
     if host in {"localhost", "127.0.0.1"}:
         CSRF_TRUSTED_ORIGINS.extend([f"http://{host}", f"https://{host}"])
     elif host.startswith("."):
+        CSRF_TRUSTED_ORIGINS.append(f'https://*{host}')
         CSRF_TRUSTED_ORIGINS.append(f'https://{host.lstrip(".")}')
     else:
         CSRF_TRUSTED_ORIGINS.append(f"https://{host}")
@@ -202,3 +208,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'statics']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+    },
+}
+
