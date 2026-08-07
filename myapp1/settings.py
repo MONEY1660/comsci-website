@@ -49,11 +49,16 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() in ('1', 'true', 'yes', '
 
 
 def get_allowed_hosts():
-    hosts = [
-        host.strip()
-        for host in os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1,.vercel.app").split(",")
-        if host.strip()
-    ]
+    raw_hosts = os.environ.get("ALLOWED_HOSTS", "")
+    if raw_hosts:
+        hosts = [h.strip() for h in raw_hosts.split(",") if h.strip()]
+    else:
+        hosts = ["localhost", "127.0.0.1", ".vercel.app", "*"]
+
+    # Ensure .vercel.app wildcard and * are present to support all Vercel deployment URLs
+    if ".vercel.app" not in hosts and "*" not in hosts:
+        hosts.append(".vercel.app")
+        hosts.append("*")
 
     for env_name in ("VERCEL_URL", "WEBSITE_HOSTNAME"):
         host = os.environ.get(env_name)
