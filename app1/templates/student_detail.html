@@ -1,4 +1,5 @@
 {%extends 'base.html' %}
+{%load static %}
 {%block content%}
 <h1 class="mt-4">{{title}}</h1>
 <ol class="breadcrumb mb-4">
@@ -10,4 +11,21 @@
 <H1>{{student.prefix_name}} {{student.first_name}} {{student.last_name}}</H1> 
 <br />
 <H1>{{student.major}}</H1> 
+{% if student.image %}
+    <img src="{{ student.image.url }}" alt="{{ student.name }}">
+    <style>img{
+        width: 200px;
+        height: 200px;
+    } </style>
+{% else %}
+    <img src="{% static 'images/null.png' %}"
+     alt="{{ student.name }}">
+
+<style>
+    img {
+        width: 200px;
+        height: 200px;
+    }
+</style>
+{% endif %}
 {% endblock content %}
