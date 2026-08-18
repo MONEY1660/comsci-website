@@ -92,4 +92,4 @@ class Student4(models.Model):
         return f"{self.prefix_name} {self.first_name} {self.last_name}".strip()
 
     def get_full_name(self):
-        return f"{self.prefix_name} {self.first_name} {self.last_name}".strip()
+        return f"{self.prefix_name} {self.first_name} {self.last_name}".strip()

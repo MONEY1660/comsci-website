@@ -54,9 +54,9 @@
         <div class="sb-sidenav-menu">
           <div class="nav">
             <div class="sb-sidenav-menu-heading">Home</div>
-            <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'app1:home' %}">
+            <a class="nav-link {% if request.path == '/dashboard/' %}active{% endif %}" href="{% url 'app1:dashboard' %}">
               <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
-              Home
+              Student Records
             </a>
             <a class="nav-link {% if request.path == '/about/' %}active{% endif %}" href="{% url 'app1:about' %}">
               <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>

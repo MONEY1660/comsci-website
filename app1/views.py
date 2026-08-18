@@ -7,6 +7,15 @@ from .models import Student
 
 def index(request):
     context = {
+        'title': 'สาขาวิชาวิทยาการคอมพิวเตอร์',
+        'date': date.today(),
+    }
+    return render(request, 'home.html', context)
+
+
+def dashboard(request):
+    """The original student-records dashboard, kept available separately."""
+    context = {
         'title': 'Home Page',
         'date': date.today(),
         'students': Student.objects.all(),
