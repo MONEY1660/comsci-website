@@ -347,6 +347,61 @@
 
         }
 
+        /* ================= BACK TO HOME ================= */
+
+.student-back-home {
+
+    margin-bottom: 30px;
+}
+
+
+.student-back-home a {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 11px 18px;
+
+    border-radius: 10px;
+
+    border: 1px solid
+        rgba(198,255,61,0.35);
+
+    background:
+        rgba(198,255,61,0.05);
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-weight: 600;
+
+    transition:
+        all 0.3s ease;
+}
+
+
+.student-back-home a:hover {
+
+    background: #c6ff3d;
+
+    color: #080c10;
+
+    border-color: #c6ff3d;
+
+    transform: translateX(-3px);
+
+    box-shadow:
+        0 8px 25px
+        rgba(198,255,61,0.15);
+}
     </style>
 
 </head>
@@ -359,6 +414,16 @@
 
     <div class="student-container">
 
+        
+<!-- ================= BACK TO HOME ================= -->
+
+<div class="student-back-home">
+
+    <a href="{% url 'app1:home' %}">
+        ← กลับหน้า HOME
+    </a>
+
+</div>
 
         <!-- ================= HEADER ================= -->
 
@@ -842,6 +907,16 @@
 
         </section>
 
+        <!-- ================= BACK TO HOME ================= -->
+
+<div class="student-back-home">
+
+    <a href="{% url 'app1:home' %}">
+        ← กลับหน้า HOME
+    </a>
+
+</div>
+
 
     </div>
 
@@ -851,3 +926,4 @@
 </body>
 
 </html>
+
