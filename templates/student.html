@@ -1,0 +1,465 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="ข้อมูลนักศึกษาสาขาวิชาวิทยาการคอมพิวเตอร์">
+
+    <title>ข้อมูลนักศึกษา | สาขาวิชาวิทยาการคอมพิวเตอร์</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+          rel="stylesheet">
+
+    <!-- Home Theme -->
+    <link href="{% static 'css/home.css' %}"
+          rel="stylesheet">
+
+    <style>
+
+        /* ===============================
+           STUDENT PAGE
+        =============================== */
+
+        .student-page {
+            min-height: 100vh;
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(198,255,61,0.08),
+                    transparent 35%
+                ),
+                #080c10;
+
+            color: #ffffff;
+
+            padding: 120px 20px 80px;
+        }
+
+        .student-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+
+        .student-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .student-header .eyebrow {
+            display: inline-block;
+
+            color: #c6ff3d;
+
+            font-family:
+                "JetBrains Mono",
+                monospace;
+
+            font-size: 13px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 12px;
+        }
+
+        .student-header h1 {
+            font-family:
+                "Space Grotesk",
+                sans-serif;
+
+            font-size: clamp(32px, 5vw, 52px);
+
+            margin: 0 0 15px;
+
+            font-weight: 700;
+        }
+
+        .student-header p {
+            color: rgba(255,255,255,0.65);
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            margin: 0 auto;
+
+            max-width: 650px;
+
+            line-height: 1.8;
+        }
+
+        /* Back Button */
+
+        .student-actions {
+            margin-bottom: 25px;
+        }
+
+        .back-home {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 11px 18px;
+
+            border: 1px solid
+                rgba(198,255,61,0.4);
+
+            border-radius: 8px;
+
+            color: #c6ff3d;
+
+            text-decoration: none;
+
+            font-family:
+                "Inter",
+                sans-serif;
+
+            font-weight: 600;
+
+            transition: all 0.3s ease;
+        }
+
+        .back-home:hover {
+            background: #c6ff3d;
+
+            color: #080c10;
+
+            transform: translateX(-4px);
+        }
+
+        /* Table Card */
+
+        .student-table-card {
+            background:
+                rgba(255,255,255,0.035);
+
+            border:
+                1px solid
+                rgba(198,255,61,0.18);
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,0.35);
+        }
+
+        .table-wrapper {
+            width: 100%;
+
+            overflow-x: auto;
+        }
+
+        /* Table */
+
+        .student-table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 700px;
+
+            font-family:
+                "Inter",
+                sans-serif;
+        }
+
+        .student-table thead {
+            background:
+                rgba(198,255,61,0.10);
+        }
+
+        .student-table th {
+            padding: 18px 20px;
+
+            text-align: left;
+
+            color: #c6ff3d;
+
+            font-family:
+                "JetBrains Mono",
+                monospace;
+
+            font-size: 13px;
+
+            letter-spacing: 0.5px;
+
+            border-bottom:
+                1px solid
+                rgba(198,255,61,0.2);
+        }
+
+        .student-table td {
+            padding: 18px 20px;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.07);
+
+            color:
+                rgba(255,255,255,0.85);
+        }
+
+        .student-table tbody tr {
+            transition:
+                background 0.25s ease;
+        }
+
+        .student-table tbody tr:hover {
+            background:
+                rgba(198,255,61,0.06);
+        }
+
+        .student-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Student ID */
+
+        .student-id {
+            color: #c6ff3d;
+
+            font-family:
+                "JetBrains Mono",
+                monospace;
+
+            font-weight: 600;
+        }
+
+        /* Number */
+
+        .student-number {
+            color:
+                rgba(255,255,255,0.4);
+
+            font-family:
+                "JetBrains Mono",
+                monospace;
+        }
+
+        /* Empty */
+
+        .empty-message {
+            text-align: center;
+
+            padding: 50px 20px;
+
+            color:
+                rgba(255,255,255,0.5);
+        }
+
+        /* Footer */
+
+        .student-footer {
+            text-align: center;
+
+            margin-top: 35px;
+
+            color:
+                rgba(255,255,255,0.4);
+
+            font-size: 13px;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 700px) {
+
+            .student-page {
+                padding:
+                    100px 15px 50px;
+            }
+
+            .student-header {
+                margin-bottom: 30px;
+            }
+
+            .student-header h1 {
+                font-size: 32px;
+            }
+
+            .student-table-card {
+                border-radius: 12px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body class="home-body">
+
+    <main class="student-page">
+
+        <div class="student-container">
+
+            <!-- ================= HEADER ================= -->
+
+            <header class="student-header">
+
+                <span class="eyebrow">
+                    STUDENT DATABASE
+                </span>
+
+                <h1>
+                    ข้อมูลนักศึกษา
+                </h1>
+
+                <p>
+                    รายชื่อนักศึกษาสาขาวิชาวิทยาการคอมพิวเตอร์
+                    ข้อมูลแสดงจากฐานข้อมูลของระบบ
+                </p>
+
+            </header>
+
+
+            <!-- ================= BACK ================= -->
+
+            <div class="student-actions">
+
+                <a href="{% url 'app1:home' %}"
+                   class="back-home">
+
+                    ← กลับหน้าแรก
+
+                </a>
+
+            </div>
+
+
+            <!-- ================= TABLE ================= -->
+
+            <section class="student-table-card">
+
+                <div class="table-wrapper">
+
+                    <table class="student-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    #
+                                </th>
+
+                                <th>
+                                    รหัสนักศึกษา
+                                </th>
+
+                                <th>
+                                    คำนำหน้า
+                                </th>
+
+                                <th>
+                                    ชื่อ
+                                </th>
+
+                                <th>
+                                    นามสกุล
+                                </th>
+
+                                <th>
+                                    สาขาวิชา
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for student in students %}
+
+                            <tr>
+
+                                <td class="student-number">
+                                    {{ forloop.counter }}
+                                </td>
+
+                               <td>
+   <a href="{% url 'app1:student_detail' student.st_id %}">
+    {{ student.st_id }}
+</a>
+</td>
+
+                                <td>
+                                    {{ student.prefix_name }}
+                                </td>
+
+                                <td>
+                                    {{ student.first_name }}
+                                </td>
+
+                                <td>
+                                    {{ student.last_name }}
+                                </td>
+
+                                <td>
+                                    {{ student.major }}
+                                </td>
+
+                            </tr>
+
+                            {% empty %}
+
+                            <tr>
+
+                                <td colspan="6"
+                                    class="empty-message">
+
+                                    ไม่พบข้อมูลนักศึกษา
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= FOOTER ================= -->
+
+            <footer class="student-footer">
+
+                ระบบข้อมูลนักศึกษา
+                สาขาวิชาวิทยาการคอมพิวเตอร์
+
+            </footer>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>
