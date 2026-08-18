@@ -908,14 +908,17 @@ body {
 
 <div class="student-content">
 
-    <!-- PREV -->
+
+    <!-- ================= PREVIOUS ================= -->
+
     <div class="student-side student-side-left">
 
         {% if prev_student %}
 
             <a
-                href="{% url 'app1:student_detail' prev_student.st_id %}"
-                class="student-nav-btn">
+                href="{% url detail_url_name prev_student.st_id %}"
+                class="student-nav-btn"
+            >
 
                 ← ก่อนหน้า
 
@@ -924,7 +927,9 @@ body {
         {% else %}
 
             <span class="student-nav-btn disabled">
+
                 ← ก่อนหน้า
+
             </span>
 
         {% endif %}
@@ -932,9 +937,11 @@ body {
     </div>
 
 
+
     <!-- ================= STUDENT CARD ================= -->
 
     <div class="student-card">
+
 
         <!-- PHOTO -->
 
@@ -944,39 +951,53 @@ body {
 
                 <img
                     src="{{ student.image.url }}"
-                    alt="{{ student.first_name }} {{ student.last_name }}">
+                    alt="{{ student.first_name }} {{ student.last_name }}"
+                >
 
             {% else %}
 
                 <img
                     src="{% static 'images/null.png' %}"
-                    alt="ไม่มีรูปนักศึกษา">
+                    alt="ไม่มีรูปนักศึกษา"
+                >
 
             {% endif %}
 
+
             <div class="photo-corner photo-tl"></div>
+
             <div class="photo-corner photo-tr"></div>
+
             <div class="photo-corner photo-bl"></div>
+
             <div class="photo-corner photo-br"></div>
 
         </div>
 
 
-        <!-- INFORMATION -->
+
+        <!-- ================= INFORMATION ================= -->
 
         <div class="student-info">
 
+
             <div class="student-id">
+
                 ID // {{ student.st_id }}
+
             </div>
+
 
             <h2 class="student-name">
 
                 {{ student.prefix_name }}
+
                 {{ student.first_name }}
+
                 {{ student.last_name }}
 
             </h2>
+
 
             <div class="student-major">
 
@@ -987,33 +1008,44 @@ body {
         </div>
 
 
-        <!-- DETAIL BOX -->
+
+        <!-- ================= DETAIL BOX ================= -->
 
         <div class="student-details">
+
 
             <div class="student-detail-box">
 
                 <div class="student-detail-label">
+
                     Student ID
+
                 </div>
 
                 <div class="student-detail-value">
+
                     {{ student.st_id }}
+
                 </div>
 
             </div>
 
 
+
             <div class="student-detail-box">
 
                 <div class="student-detail-label">
+
                     Name
+
                 </div>
 
                 <div class="student-detail-value">
 
                     {{ student.prefix_name }}
+
                     {{ student.first_name }}
+
                     {{ student.last_name }}
 
                 </div>
@@ -1021,22 +1053,23 @@ body {
             </div>
 
 
-            
-
         </div>
+
 
     </div>
 
 
-    <!-- NEXT -->
+
+    <!-- ================= NEXT ================= -->
 
     <div class="student-side student-side-right">
 
         {% if next_student %}
 
             <a
-                href="{% url 'app1:student_detail' next_student.st_id %}"
-                class="student-nav-btn">
+                href="{% url detail_url_name next_student.st_id %}"
+                class="student-nav-btn"
+            >
 
                 ถัดไป →
 
@@ -1045,11 +1078,14 @@ body {
         {% else %}
 
             <span class="student-nav-btn disabled">
+
                 ถัดไป →
+
             </span>
 
         {% endif %}
 
     </div>
+
 
 </div>

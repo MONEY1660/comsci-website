@@ -4,193 +4,234 @@
 <html lang="th">
 
 <head>
+
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <meta name="description"
-          content="ข้อมูลนักศึกษาสาขาวิชาวิทยาการคอมพิวเตอร์">
+    <title>
+        ข้อมูลนักศึกษา | สาขาวิชาวิทยาการคอมพิวเตอร์
+    </title>
 
-    <title>ข้อมูลนักศึกษา | สาขาวิชาวิทยาการคอมพิวเตอร์</title>
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
 
-    <!-- Google Fonts -->
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
 
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
-          rel="stylesheet">
+    <link
+        href="{% static 'css/home.css' %}"
+        rel="stylesheet"
+    >
 
-    <!-- Home Theme -->
-    <link href="{% static 'css/home.css' %}"
-          rel="stylesheet">
 
     <style>
 
-        /* ===============================
-           STUDENT PAGE
-        =============================== */
+        html,
+        body {
 
-        .student-page {
-            min-height: 100vh;
-            background:
-                radial-gradient(
-                    circle at top right,
-                    rgba(198,255,61,0.08),
-                    transparent 35%
-                ),
-                #080c10;
+            margin: 0;
+
+            padding: 0;
+
+            width: 100%;
+
+            background: #080c10;
 
             color: #ffffff;
 
-            padding: 120px 20px 80px;
+            font-family: "Inter", sans-serif;
         }
 
+
+        .student-page {
+
+            min-height: 100vh;
+
+            padding:
+                110px 20px 80px;
+
+            box-sizing: border-box;
+
+            background:
+                radial-gradient(
+                    circle at 80% 20%,
+                    rgba(198,255,61,0.06),
+                    transparent 30%
+                ),
+                #080c10;
+        }
+
+
         .student-container {
-            max-width: 1200px;
+
+            width: 100%;
+
+            max-width: 1100px;
+
             margin: 0 auto;
         }
 
-        /* Header */
+
+        /* ================= HEADER ================= */
 
         .student-header {
+
             text-align: center;
+
+            margin-bottom: 50px;
+        }
+
+
+        .student-header h1 {
+
+            font-family:
+                "Space Grotesk",
+                sans-serif;
+
+            font-size:
+                clamp(2rem, 5vw, 3.5rem);
+
+            margin: 0;
+        }
+
+
+        .student-header h1 span {
+
+            color: #c6ff3d;
+        }
+
+
+        .student-header p {
+
+            color: var(--text-muted);
+
+            margin-top: 12px;
+        }
+
+
+        /* ================= YEAR SECTION ================= */
+
+        .student-year-section {
+
             margin-bottom: 45px;
         }
 
-        .student-header .eyebrow {
-            display: inline-block;
 
-            color: #c6ff3d;
+        .student-year-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .student-year-number {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            width: 45px;
+
+            height: 45px;
+
+            border-radius: 12px;
+
+            background: #c6ff3d;
+
+            color: #080c10;
 
             font-family:
                 "JetBrains Mono",
                 monospace;
 
-            font-size: 13px;
+            font-weight: 700;
 
-            letter-spacing: 2px;
-
-            margin-bottom: 12px;
+            font-size: 18px;
         }
 
-        .student-header h1 {
+
+        .student-year-title h2 {
+
+            margin: 0;
+
             font-family:
                 "Space Grotesk",
                 sans-serif;
 
-            font-size: clamp(32px, 5vw, 52px);
-
-            margin: 0 0 15px;
-
-            font-weight: 700;
+            font-size: 26px;
         }
 
-        .student-header p {
-            color: rgba(255,255,255,0.65);
 
-            font-family:
-                "Inter",
-                sans-serif;
-
-            margin: 0 auto;
-
-            max-width: 650px;
-
-            line-height: 1.8;
-        }
-
-        /* Back Button */
-
-        .student-actions {
-            margin-bottom: 25px;
-        }
-
-        .back-home {
-            display: inline-flex;
-
-            align-items: center;
-
-            gap: 8px;
-
-            padding: 11px 18px;
-
-            border: 1px solid
-                rgba(198,255,61,0.4);
-
-            border-radius: 8px;
-
-            color: #c6ff3d;
-
-            text-decoration: none;
-
-            font-family:
-                "Inter",
-                sans-serif;
-
-            font-weight: 600;
-
-            transition: all 0.3s ease;
-        }
-
-        .back-home:hover {
-            background: #c6ff3d;
-
-            color: #080c10;
-
-            transform: translateX(-4px);
-        }
-
-        /* Table Card */
+        /* ================= TABLE CARD ================= */
 
         .student-table-card {
-            background:
-                rgba(255,255,255,0.035);
-
-            border:
-                1px solid
-                rgba(198,255,61,0.18);
-
-            border-radius: 18px;
 
             overflow: hidden;
 
+            border-radius: 18px;
+
+            border:
+                1px solid
+                rgba(198,255,61,0.2);
+
+            background:
+                rgba(255,255,255,0.025);
+
             box-shadow:
-                0 25px 70px
-                rgba(0,0,0,0.35);
+                0 20px 50px
+                rgba(0,0,0,0.3);
         }
 
-        .table-wrapper {
+
+        .student-table-wrapper {
+
             width: 100%;
 
             overflow-x: auto;
         }
 
-        /* Table */
 
         .student-table {
+
             width: 100%;
 
+            min-width: 750px;
+
             border-collapse: collapse;
-
-            min-width: 700px;
-
-            font-family:
-                "Inter",
-                sans-serif;
         }
+
 
         .student-table thead {
+
             background:
-                rgba(198,255,61,0.10);
+                rgba(198,255,61,0.08);
         }
 
+
         .student-table th {
-            padding: 18px 20px;
+
+            padding: 16px 18px;
 
             text-align: left;
 
@@ -200,44 +241,58 @@
                 "JetBrains Mono",
                 monospace;
 
-            font-size: 13px;
+            font-size: 12px;
 
             letter-spacing: 0.5px;
 
             border-bottom:
                 1px solid
-                rgba(198,255,61,0.2);
+                rgba(198,255,61,0.18);
         }
 
+
         .student-table td {
-            padding: 18px 20px;
+
+            padding: 15px 18px;
 
             border-bottom:
                 1px solid
-                rgba(255,255,255,0.07);
+                rgba(255,255,255,0.06);
 
-            color:
-                rgba(255,255,255,0.85);
+            color: #ffffff;
         }
 
+
         .student-table tbody tr {
+
             transition:
                 background 0.25s ease;
         }
 
+
         .student-table tbody tr:hover {
+
             background:
-                rgba(198,255,61,0.06);
+                rgba(198,255,61,0.05);
         }
 
-        .student-table tbody tr:last-child td {
-            border-bottom: none;
+
+        .student-number {
+
+            color:
+                rgba(255,255,255,0.45);
+
+            font-family:
+                "JetBrains Mono",
+                monospace;
         }
 
-        /* Student ID */
 
-        .student-id {
+        .student-id-link {
+
             color: #c6ff3d;
+
+            text-decoration: none;
 
             font-family:
                 "JetBrains Mono",
@@ -246,113 +301,103 @@
             font-weight: 600;
         }
 
-        /* Number */
 
-        .student-number {
-            color:
-                rgba(255,255,255,0.4);
+        .student-id-link:hover {
 
-            font-family:
-                "JetBrains Mono",
-                monospace;
+            text-shadow:
+                0 0 12px
+                rgba(198,255,61,0.7);
         }
 
-        /* Empty */
 
-        .empty-message {
+        .empty-student {
+
+            padding: 30px !important;
+
             text-align: center;
 
-            padding: 50px 20px;
-
             color:
-                rgba(255,255,255,0.5);
+                rgba(255,255,255,0.4) !important;
         }
 
-        /* Footer */
 
-        .student-footer {
-            text-align: center;
-
-            margin-top: 35px;
-
-            color:
-                rgba(255,255,255,0.4);
-
-            font-size: 13px;
-        }
-
-        /* Mobile */
+        /* ================= MOBILE ================= */
 
         @media (max-width: 700px) {
 
             .student-page {
+
                 padding:
-                    100px 15px 50px;
+                    90px 15px 50px;
             }
 
-            .student-header {
-                margin-bottom: 30px;
+
+            .student-year-title h2 {
+
+                font-size: 22px;
             }
 
-            .student-header h1 {
-                font-size: 32px;
-            }
 
-            .student-table-card {
-                border-radius: 12px;
+            .student-year-number {
+
+                width: 40px;
+
+                height: 40px;
             }
 
         }
 
     </style>
+
 </head>
 
 
-<body class="home-body">
+<body>
 
-    <main class="student-page">
 
-        <div class="student-container">
+<main class="student-page">
 
-            <!-- ================= HEADER ================= -->
+    <div class="student-container">
 
-            <header class="student-header">
 
-                <span class="eyebrow">
-                    STUDENT DATABASE
+        <!-- ================= HEADER ================= -->
+
+        <div class="student-header">
+
+            <h1>
+                ข้อมูล<span>นักศึกษา</span>
+            </h1>
+
+            <p>
+                รายชื่อนักศึกษาสาขาวิชาวิทยาการคอมพิวเตอร์
+            </p>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             YEAR 1
+        ====================================================== -->
+
+        <section class="student-year-section">
+
+            <div class="student-year-title">
+
+                <span class="student-year-number">
+                    01
                 </span>
 
-                <h1>
-                    ข้อมูลนักศึกษา
-                </h1>
-
-                <p>
-                    รายชื่อนักศึกษาสาขาวิชาวิทยาการคอมพิวเตอร์
-                    ข้อมูลแสดงจากฐานข้อมูลของระบบ
-                </p>
-
-            </header>
-
-
-            <!-- ================= BACK ================= -->
-
-            <div class="student-actions">
-
-                <a href="{% url 'app1:home' %}"
-                   class="back-home">
-
-                    ← กลับหน้าแรก
-
-                </a>
+                <h2>
+                    นักศึกษาชั้นปีที่ 1
+                </h2>
 
             </div>
 
 
-            <!-- ================= TABLE ================= -->
+            <div class="student-table-card">
 
-            <section class="student-table-card">
-
-                <div class="table-wrapper">
+                <div class="student-table-wrapper">
 
                     <table class="student-table">
 
@@ -391,7 +436,7 @@
 
                         <tbody>
 
-                            {% for student in students %}
+                        {% for student in student1_list %}
 
                             <tr>
 
@@ -399,11 +444,18 @@
                                     {{ forloop.counter }}
                                 </td>
 
-                               <td>
-   <a href="{% url 'app1:student_detail' student.st_id %}">
-    {{ student.st_id }}
-</a>
-</td>
+                                <td>
+
+                                    <a
+                                        href="{% url 'app1:student_detail1' student.st_id %}"
+                                        class="student-id-link"
+                                    >
+
+                                        {{ student.st_id }}
+
+                                    </a>
+
+                                </td>
 
                                 <td>
                                     {{ student.prefix_name }}
@@ -423,20 +475,20 @@
 
                             </tr>
 
-                            {% empty %}
+                        {% empty %}
 
                             <tr>
 
-                                <td colspan="6"
-                                    class="empty-message">
-
-                                    ไม่พบข้อมูลนักศึกษา
-
+                                <td
+                                    colspan="6"
+                                    class="empty-student"
+                                >
+                                    ยังไม่มีข้อมูลนักศึกษาชั้นปีที่ 1
                                 </td>
 
                             </tr>
 
-                            {% endfor %}
+                        {% endfor %}
 
                         </tbody>
 
@@ -444,21 +496,357 @@
 
                 </div>
 
-            </section>
+            </div>
+
+        </section>
 
 
-            <!-- ================= FOOTER ================= -->
 
-            <footer class="student-footer">
+        <!-- =====================================================
+             YEAR 2
+        ====================================================== -->
 
-                ระบบข้อมูลนักศึกษา
-                สาขาวิชาวิทยาการคอมพิวเตอร์
+        <section class="student-year-section">
 
-            </footer>
+            <div class="student-year-title">
 
-        </div>
+                <span class="student-year-number">
+                    02
+                </span>
 
-    </main>
+                <h2>
+                    นักศึกษาชั้นปีที่ 2
+                </h2>
+
+            </div>
+
+
+            <div class="student-table-card">
+
+                <div class="student-table-wrapper">
+
+                    <table class="student-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>#</th>
+
+                                <th>รหัสนักศึกษา</th>
+
+                                <th>คำนำหน้า</th>
+
+                                <th>ชื่อ</th>
+
+                                <th>นามสกุล</th>
+
+                                <th>สาขาวิชา</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                        {% for student in student2_list %}
+
+                            <tr>
+
+                                <td class="student-number">
+                                    {{ forloop.counter }}
+                                </td>
+
+                                <td>
+
+                                    <a
+                                        href="{% url 'app1:student_detail2' student.st_id %}"
+                                        class="student-id-link"
+                                    >
+
+                                        {{ student.st_id }}
+
+                                    </a>
+
+                                </td>
+
+                                <td>
+                                    {{ student.prefix_name }}
+                                </td>
+
+                                <td>
+                                    {{ student.first_name }}
+                                </td>
+
+                                <td>
+                                    {{ student.last_name }}
+                                </td>
+
+                                <td>
+                                    {{ student.major }}
+                                </td>
+
+                            </tr>
+
+                        {% empty %}
+
+                            <tr>
+
+                                <td
+                                    colspan="6"
+                                    class="empty-student"
+                                >
+                                    ยังไม่มีข้อมูลนักศึกษาชั้นปีที่ 2
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             YEAR 3
+        ====================================================== -->
+
+        <section class="student-year-section">
+
+            <div class="student-year-title">
+
+                <span class="student-year-number">
+                    03
+                </span>
+
+                <h2>
+                    นักศึกษาชั้นปีที่ 3
+                </h2>
+
+            </div>
+
+
+            <div class="student-table-card">
+
+                <div class="student-table-wrapper">
+
+                    <table class="student-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>#</th>
+
+                                <th>รหัสนักศึกษา</th>
+
+                                <th>คำนำหน้า</th>
+
+                                <th>ชื่อ</th>
+
+                                <th>นามสกุล</th>
+
+                                <th>สาขาวิชา</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                        {% for student in student3_list %}
+
+                            <tr>
+
+                                <td class="student-number">
+                                    {{ forloop.counter }}
+                                </td>
+
+                                <td>
+
+                                    <a
+                                        href="{% url 'app1:student_detail3' student.st_id %}"
+                                        class="student-id-link"
+                                    >
+
+                                        {{ student.st_id }}
+
+                                    </a>
+
+                                </td>
+
+                                <td>
+                                    {{ student.prefix_name }}
+                                </td>
+
+                                <td>
+                                    {{ student.first_name }}
+                                </td>
+
+                                <td>
+                                    {{ student.last_name }}
+                                </td>
+
+                                <td>
+                                    {{ student.major }}
+                                </td>
+
+                            </tr>
+
+                        {% empty %}
+
+                            <tr>
+
+                                <td
+                                    colspan="6"
+                                    class="empty-student"
+                                >
+                                    ยังไม่มีข้อมูลนักศึกษาชั้นปีที่ 3
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             YEAR 4
+        ====================================================== -->
+
+        <section class="student-year-section">
+
+            <div class="student-year-title">
+
+                <span class="student-year-number">
+                    04
+                </span>
+
+                <h2>
+                    นักศึกษาชั้นปีที่ 4
+                </h2>
+
+            </div>
+
+
+            <div class="student-table-card">
+
+                <div class="student-table-wrapper">
+
+                    <table class="student-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>#</th>
+
+                                <th>รหัสนักศึกษา</th>
+
+                                <th>คำนำหน้า</th>
+
+                                <th>ชื่อ</th>
+
+                                <th>นามสกุล</th>
+
+                                <th>สาขาวิชา</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                        {% for student in student4_list %}
+
+                            <tr>
+
+                                <td class="student-number">
+                                    {{ forloop.counter }}
+                                </td>
+
+                                <td>
+
+                                    <a
+                                        href="{% url 'app1:student_detail4' student.st_id %}"
+                                        class="student-id-link"
+                                    >
+
+                                        {{ student.st_id }}
+
+                                    </a>
+
+                                </td>
+
+                                <td>
+                                    {{ student.prefix_name }}
+                                </td>
+
+                                <td>
+                                    {{ student.first_name }}
+                                </td>
+
+                                <td>
+                                    {{ student.last_name }}
+                                </td>
+
+                                <td>
+                                    {{ student.major }}
+                                </td>
+
+                            </tr>
+
+                        {% empty %}
+
+                            <tr>
+
+                                <td
+                                    colspan="6"
+                                    class="empty-student"
+                                >
+                                    ยังไม่มีข้อมูลนักศึกษาชั้นปีที่ 4
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+</main>
+
 
 </body>
 
