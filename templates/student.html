@@ -402,7 +402,37 @@
         0 8px 25px
         rgba(198,255,61,0.15);
 }
-    </style>
+    .year-button-group {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .year-btn {
+            background: rgba(198,255,61,0.05);
+            border: 1px solid rgba(198,255,61,0.35);
+            color: #ffffff;
+            padding: 11px 18px;
+            margin: 0 5px;
+            border-radius: 10px;
+            font-family: "Inter", sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .year-btn.active,
+        .year-btn:hover {
+            background: #c6ff3d;
+            color: #080c10;
+            border-color: #c6ff3d;
+            transform: translateX(-3px);
+            box-shadow: 0 8px 25px rgba(198,255,61,0.15);
+        }
+
+        .year-btn:active {
+            transform: translateX(0);
+        }
+</style>
 
 </head>
 
@@ -441,11 +471,18 @@
 
 
 
+        <div class="year-button-group">
+      <button class="year-btn active" data-year="1">ปีที่ 1</button>
+      <button class="year-btn" data-year="2">ปีที่ 2</button>
+      <button class="year-btn" data-year="3">ปีที่ 3</button>
+      <button class="year-btn" data-year="4">ปีที่ 4</button>
+    </div>
+
         <!-- =====================================================
              YEAR 1
         ====================================================== -->
 
-        <section class="student-year-section">
+        <section class="student-year-section" data-year="1">
 
             <div class="student-year-title">
 
@@ -571,7 +608,7 @@
              YEAR 2
         ====================================================== -->
 
-        <section class="student-year-section">
+        <section class="student-year-section" data-year="2">
 
             <div class="student-year-title">
 
@@ -685,7 +722,7 @@
              YEAR 3
         ====================================================== -->
 
-        <section class="student-year-section">
+        <section class="student-year-section" data-year="3">
 
             <div class="student-year-title">
 
@@ -799,7 +836,7 @@
              YEAR 4
         ====================================================== -->
 
-        <section class="student-year-section">
+        <section class="student-year-section" data-year="4">
 
             <div class="student-year-title">
 
@@ -923,6 +960,37 @@
 </main>
 
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const yearButtons = document.querySelectorAll('.year-btn');
+    const yearSections = document.querySelectorAll('.student-year-section');
+
+    yearButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const year = this.getAttribute('data-year');
+
+            if (this.classList.contains('active')) {
+                // If already active, reset to show all
+                this.classList.remove('active');
+                yearSections.forEach(section => {
+                    section.style.display = '';
+                });
+            } else {
+                // Hide all sections and show the selected one
+                yearButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                yearSections.forEach(section => {
+                    if (section.getAttribute('data-year') === year) {
+                        section.style.display = '';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+            }
+        });
+    });
+});
+</script>
 </body>
 
 </html>

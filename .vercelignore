@@ -1,0 +1,75 @@
+# Ignore files that are not needed for production
+.env
+.env.example
+.git
+.gitignore
+__pycache__
+*.pyc
+db.sqlite3
+*.log
+.DS_Store
+Thumbs.db
+.vscode
+.idea
+*.sqlite3
+pytest_cache
+.coverage
+htmlcov
+.tox
+.nox
+.eggs
+*.egg
+*.egg-info
+dist
+build
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+man
+var
+sandbox
+pip-wheel-metadata
+share
+python-wheels
+# Ignore local development files
+node_modules
+npm-debug.log
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+# Ignore Django specific files that shouldn't be deployed
+fixtures
+.idea
+*.iml
+# Ignore test files
+tests
+test_*.py
+*_test.py
+# Ignore coverage reports
+coverage
+.coverage*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis
+.pytest_cache
+# Ignore IDE files
+.vscode/*
+.idea/*
+*.sublime-workspace
+*.sublime-project
+# Ignore OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
