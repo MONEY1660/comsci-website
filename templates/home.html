@@ -1,0 +1,1776 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="สาขาวิชาวิทยาการคอมพิวเตอร์ — หลักสูตรที่มุ่งผลิตนักพัฒนาซอฟต์แวร์ นักวิทยาการข้อมูล และผู้เชี่ยวชาญด้านความมั่นคงปลอดภัยไซเบอร์" />
+  <title>{% block title %}สาขาวิชาวิทยาการคอมพิวเตอร์{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="{% static 'css/home.css' %}" rel="stylesheet" />
+  <style>
+  /* ===== HERO IMAGE DESIGN ===== */
+
+ .image-container {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  margin-left: auto;
+  transform: scale(1.08);
+}
+
+  .image-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 4;
+    overflow: hidden;
+    border-radius: 24px;
+
+    background: linear-gradient(
+      135deg,
+      rgba(198, 255, 61, 0.12),
+      rgba(255, 255, 255, 0.03)
+    );
+
+    border: 1px solid rgba(198, 255, 61, 0.35);
+
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.45),
+      0 0 45px rgba(198, 255, 61, 0.10);
+
+    transform: rotateY(-2deg);
+
+    transition:
+      transform 0.5s ease,
+      box-shadow 0.5s ease,
+      border-color 0.5s ease;
+  }
+
+  .main-image {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    display: block;
+
+    filter:
+      saturate(0.9)
+      contrast(1.05)
+      brightness(0.82);
+
+    transition:
+      transform 0.7s ease,
+      filter 0.5s ease;
+  }
+
+  /* แสง Glow */
+  .image-glow {
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    top: -100px;
+    right: -80px;
+
+    background: #c6ff3d;
+
+    filter: blur(90px);
+    opacity: 0.18;
+
+    border-radius: 50%;
+
+    z-index: 1;
+  }
+
+  /* Scanline */
+  .image-frame::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 3;
+
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 5px,
+        rgba(255,255,255,0.025) 6px
+      );
+
+    pointer-events: none;
+  }
+
+  /* Gradient Overlay */
+  .image-frame::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 2;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgba(198,255,61,0.10),
+        transparent 40%,
+        rgba(0,0,0,0.45)
+      );
+
+    pointer-events: none;
+  }
+
+  /* ===== TECH CORNERS ===== */
+
+  .corner {
+    position: absolute;
+
+    width: 22px;
+    height: 22px;
+
+    z-index: 5;
+  }
+
+  .corner--tl {
+    top: 14px;
+    left: 14px;
+
+    border-top: 2px solid #c6ff3d;
+    border-left: 2px solid #c6ff3d;
+  }
+
+  .corner--tr {
+    top: 14px;
+    right: 14px;
+
+    border-top: 2px solid #c6ff3d;
+    border-right: 2px solid #c6ff3d;
+  }
+
+  .corner--bl {
+    bottom: 14px;
+    left: 14px;
+
+    border-bottom: 2px solid #c6ff3d;
+    border-left: 2px solid #c6ff3d;
+  }
+
+  .corner--br {
+    bottom: 14px;
+    right: 14px;
+
+    border-bottom: 2px solid #c6ff3d;
+    border-right: 2px solid #c6ff3d;
+  }
+
+  /* ===== LABEL ===== */
+
+  .image-overlay {
+    position: absolute;
+
+    left: 22px;
+    bottom: 20px;
+
+    z-index: 6;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 9px 13px;
+
+    background: rgba(8,12,16,0.80);
+
+    border: 1px solid rgba(198,255,61,0.35);
+
+    border-radius: 8px;
+
+    backdrop-filter: blur(10px);
+  }
+
+  .image-tag {
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: 1.5px;
+
+    color: #c6ff3d;
+  }
+
+  .image-line {
+    width: 25px;
+    height: 1px;
+
+    background: #c6ff3d;
+
+    box-shadow:
+      0 0 8px rgba(198,255,61,0.7);
+  }
+
+  /* ===== HOVER ===== */
+
+  .image-frame:hover {
+    transform:
+      rotateY(0deg)
+      translateY(-8px);
+
+    border-color: rgba(198,255,61,0.7);
+
+    box-shadow:
+      0 25px 70px rgba(0,0,0,0.5),
+      0 0 55px rgba(198,255,61,0.18);
+  }
+
+  .image-frame:hover .main-image {
+    transform: scale(1.05);
+
+    filter:
+      saturate(1.05)
+      contrast(1.08)
+      brightness(0.9);
+  }
+
+  /* ===== MOBILE ===== */
+
+  @media (max-width: 900px) {
+    .image-container {
+      max-width: 100%;
+      margin: 35px auto 0;
+    }
+
+    .image-frame {
+      transform: none;
+    }
+
+    .image-frame:hover {
+      transform: translateY(-5px);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .image-frame {
+      aspect-ratio: 16 / 11;
+      border-radius: 18px;
+    }
+
+    .image-overlay {
+      left: 14px;
+      bottom: 14px;
+    }
+
+    .image-tag {
+      font-size: 9px;
+    }
+
+    .corner {
+      width: 17px;
+      height: 17px;
+    }
+  }
+</style>
+<style>
+.faculty-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 24px;
+}
+
+/* 3 คนด้านบน */
+.faculty-card:nth-child(1),
+.faculty-card:nth-child(2),
+.faculty-card:nth-child(3) {
+    grid-column: span 2;
+}
+
+/* 2 คนด้านล่าง */
+.faculty-card:nth-child(4) {
+    grid-column: 2 / span 2;
+}
+
+.faculty-card:nth-child(5) {
+    grid-column: 4 / span 2;
+}
+</style>
+<style>
+  .avatar {
+    width: 90px;
+    height: 90px;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    background: #c6ff3d;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 18px;
+
+    border: 2px solid rgba(198, 255, 61, 0.7);
+
+    box-shadow:
+      0 0 25px rgba(198, 255, 61, 0.18);
+  }
+
+  .avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+  }
+</style>
+</head>
+<body class="home-body">
+
+  <!-- ================= NAV ================= -->
+  <nav class="nav">
+    <div class="container nav__inner">
+      <a href="#hero" class="nav__brand">CS<span>.</span></a>
+      <button class="nav__toggle" id="navToggle" aria-label="เปิดเมนู">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="#hero">หน้าแรก</a></li>
+        <li><a href="#about">เกี่ยวกับเรา</a></li>
+        <li><a href="#courses">หลักสูตร</a></li>
+        <li><a href="#schedule">แผนการเรียน</a></li>
+        <li><a href="#faculty">คณาจารย์</a></li>
+        <li>
+    <a href="{% url 'app1:students' %}">ข้อมูลนักศึกษา</a>
+  </li>
+        <li><a href="#contact">ติดต่อเรา</a></li>
+      </ul>
+      <a href="https://www.oass.sskru.ac.th/std.sskru/s1.html" class="btn btn--accent">สมัครเรียน</a>
+    </div>
+  </nav>
+
+  <!-- ================= HERO ================= -->
+  <header class="hero on-ink" id="hero">
+    <div class="container">
+      <div class="hero__grid">
+        <div>
+          <span class="eyebrow">สาขาวิชาวิทยาการคอมพิวเตอร์</span>
+          <h1 class="hero__title">เขียนโค้ดวันนี้<br>เพื่อสร้าง<em>อนาคตของคุณ</em></h1>
+          <p class="hero__desc">
+            หลักสูตรที่ผสานพื้นฐานวิทยาการคอมพิวเตอร์เข้ากับการลงมือทำจริง
+            ตั้งแต่การพัฒนาซอฟต์แวร์ ปัญญาประดิษฐ์ ไปจนถึงความมั่นคงปลอดภัยไซเบอร์
+            เตรียมพร้อมนักศึกษาให้ก้าวสู่สายอาชีพไอทีอย่างมั่นใจ
+          </p>
+          <div class="hero__actions">
+            <a href="https://www.oass.sskru.ac.th/std.sskru/s1.html" class="btn btn--accent">สมัครเข้าศึกษาต่อ</a>
+            <a href="#courses" class="btn btn--ghost-ink">ดูรายละเอียดหลักสูตร</a>
+          </div>
+        </div>
+
+      <div class="image-container reveal">
+
+  <div class="image-frame">
+
+    <!-- แสงด้านหลัง -->
+    <div class="image-glow"></div>
+
+    <!-- รูปภาพ -->
+    <img 
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG8iFnE7EOzyJS83_batKk5OvsEBqiN_svOkb7XFGUv4FpCxSrXGOGZ3I&s=10"
+      alt="นักศึกษาสาขาวิชาวิทยาการคอมพิวเตอร์"
+      class="main-image"
+    >
+
+  
+
+    <!-- มุมแบบ Tech -->
+    <div class="corner corner--tl"></div>
+    <div class="corner corner--tr"></div>
+    <div class="corner corner--bl"></div>
+    <div class="corner corner--br"></div>
+
+  </div>
+
+</div>
+
+      <div class="stats">
+        <div class="stats__item">
+          <div class="stats__num"><span data-count-to="4"></span> ปี</div>
+          <div class="stats__label">ระยะเวลาหลักสูตร</div>
+        </div>
+        <div class="stats__item">
+          <div class="stats__num"><span data-count-to="130" data-suffix="+"></span></div>
+          <div class="stats__label">หน่วยกิตตลอดหลักสูตร</div>
+        </div>
+        <div class="stats__item">
+          <div class="stats__num"><span data-count-to="3"></span></div>
+          <div class="stats__label">กลุ่มวิชาเฉพาะทาง</div>
+        </div>
+        <div class="stats__item">
+          <div class="stats__num"><span data-count-to="6"></span></div>
+          <div class="stats__label">คณาจารย์ประจำหลักสูตร</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about__grid">
+        <div class="reveal">
+          <span class="eyebrow">เกี่ยวกับเรา</span>
+          <h2 style="margin-top:14px;">ปั้นนักพัฒนา<br>สร้างนักคิดเชิงระบบ</h2>
+          <p style="color:var(--text-muted); margin-top:16px; max-width:52ch;">
+            เรามุ่งผลิตบัณฑิตที่มีทั้งความเชี่ยวชาญด้านเทคนิคและจริยธรรมวิชาชีพ
+            ผ่านการเรียนรู้ที่ผสานทฤษฎีเข้ากับโครงงานจริง เพื่อให้นักศึกษาพร้อมทำงาน
+            ตั้งแต่วันแรกที่ก้าวออกจากรั้วมหาวิทยาลัย
+          </p>
+          <div class="about__pillars">
+            <div class="pillar">
+              <h4>ปรัชญา</h4>
+              <p>เชี่ยวชาญเชิงเทคนิค มีคุณธรรม นำนวัตกรรมไปใช้พัฒนาสังคม</p>
+            </div>
+            <div class="pillar">
+              <h4>วิสัยทัศน์</h4>
+              <p>เป็นหลักสูตรชั้นนำที่ผลิตบุคลากรไอทีคุณภาพสู่ตลาดงานดิจิทัล</p>
+            </div>
+            <div class="pillar">
+              <h4>พันธกิจ</h4>
+              <p>จัดการเรียนการสอนที่ทันสมัยควบคู่กับงานวิจัยและบริการวิชาการ</p>
+            </div>
+            <div class="pillar">
+              <h4>เป้าหมาย</h4>
+              <p>บัณฑิตมีทักษะปฏิบัติจริง พร้อมทำงานหรือศึกษาต่อในระดับสูง</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <div class="feature-card">
+            <div class="feature-card__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 2 8l10 5 10-5-10-5Z"/><path d="M6 10.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5"/></svg>
+            </div>
+            <div>
+              <h4>คณาจารย์คุณวุฒิ</h4>
+              <p>ทีมอาจารย์ระดับปริญญาเอกและผู้เชี่ยวชาญเฉพาะทาง ดูแลใกล้ชิดตลอดหลักสูตร</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </div>
+            <div>
+              <h4>ห้องปฏิบัติการครบวงจร</h4>
+              <p>ห้องแล็บคอมพิวเตอร์ เครือข่าย และ AI ที่พร้อมรองรับการเรียนรู้เชิงปฏิบัติ</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 4 5.7 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.7-4-9s1.5-6.5 4-9Z"/></svg>
+            </div>
+            <div>
+              <h4>เครือข่ายพันธมิตรอุตสาหกรรม</h4>
+              <p>ความร่วมมือกับสถานประกอบการเพื่อการฝึกงานและสหกิจศึกษา</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= COURSES ================= -->
+  <section class="courses" id="courses">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">หลักสูตร</span>
+        <h2>โครงสร้างวิชาที่ตอบโจทย์สายงานไอที</h2>
+        <p>แบ่งกลุ่มวิชาออกเป็น 3 กลุ่มหลัก เพื่อปูพื้นฐานและต่อยอดสู่ความเชี่ยวชาญเฉพาะทาง</p>
+      </div>
+
+      <div class="tabs" data-tabs="courses">
+        <button class="is-active" data-tab-target="core">Core CS</button>
+        <button data-tab-target="se">Software Engineering</button>
+        <button data-tab-target="ai">AI &amp; Data Science</button>
+      </div>
+
+      <div class="tab-panel is-active" data-tab-panel="core" data-tabs-group="courses">
+        <div class="course-grid">
+          <div class="course-card">
+            <div class="course-card__top"><span class="badge mono">CS201</span><span class="badge badge--lab">มีแล็บ</span></div>
+            <h4>โครงสร้างข้อมูลและขั้นตอนวิธี</h4>
+            <div class="course-card__en">Data Structures &amp; Algorithms</div>
+            <p class="desc">ออกแบบและวิเคราะห์ประสิทธิภาพของโครงสร้างข้อมูลและอัลกอริทึมพื้นฐาน</p>
+            <div class="course-card__credit">3 หน่วยกิต</div>
+          </div>
+          <div class="course-card">
+            <div class="course-card__top"><span class="badge mono">CS210</span></div>
+            <h4>ระบบปฏิบัติการ</h4>
+            <div class="course-card__en">Operating Systems</div>
+            <p class="desc">หลักการทำงานของระบบปฏิบัติการ การจัดการโพรเซสและหน่วยความจำ</p>
+            <div class="course-card__credit">3 หน่วยกิต</div>
+          </div>
+          <div class="course-card">
+            <div class="course-card__top"><span class="badge mono">CS230</span><span class="badge badge--lab">มีแล็บ</span></div>
+            <h4>เครือข่ายคอมพิวเตอร์</h4>
+            <div class="course-card__en">Computer Networks</div>
+            <p class="desc">การออกแบบและดูแลระบบเครือข่ายทั้งแบบมีสายและไร้สาย</p>
+            <div class="course-card__credit">3 หน่วยกิต</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-tab-panel="se" data-tabs-group="courses">
+        <div class="course-grid">
+          <div class="course-card">
+            <div class="course-card__top"><span class="badge mono">SE301</span></div>
+            <h4>วิศวกรรมซอฟต์แวร์</h4>
+            <div class="course-card__en">Software Engineering</div>
+            <p class="desc">กระบวนการพัฒนาซอฟต์แวร์ตั้งแต่การวิเคราะห์ความต้องการถึงการทดสอบ</p>
+            <div class="course-card__credit">3 หน่วยกิต</div>
+          </div>
+          <div class="course-card">
+            <div class="course-card__top"><span class="badge mono">SE310</span><span class="badge badge--lab">มีแล็บ</span></div>
+            <h4>การพัฒนาเว็บแอปพลิเคชัน</h4>
+            <div class="course-card__en">Web Application Development</div>
+            <p class="desc">พัฒนาเว็บแอปพลิเคชันแบบ Full-stack ด้วยเครื่องมือที่ใช้งานจริงในอุตสาหกรรม</p>
+            <div class="course-card__credit">3 หน่วยกิต</div>
+          </div>
+          <div class="course-card">
+            <div class="course-card__top"><span class="badge mono">SE320</span><span class="badge badge--lab">มีแล็บ</span></div>
+            <h4>ระบบฐานข้อมูล</h4>
+            <div class="course-card__en">Database Systems</div>
+            <p class="desc">การออกแบบฐานข้อมูลเชิงสัมพันธ์และการเขียนคำสั่ง SQL</p>
+            <div class="course-card__credit">3 หน่วยกิต</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" data-tab-panel="ai" data-tabs-group="courses">
+        <div class="course-grid">
+          <div class="course-card">
+            <div class="course-card__top"><span class="badge mono">AI401</span></div>
+            <h4>การเรียนรู้ของเครื่อง</h4>
+            <div class="course-card__en">Machine Learning</div>
+            <p class="desc">แนวคิดและเทคนิคการสร้างแบบจำลองการเรียนรู้ของเครื่องเบื้องต้น</p>
+            <div class="course-card__credit">3 หน่วยกิต</div>
+          </div>
+          <div class="course-card">
+            <div class="course-card__top"><span class="badge mono">AI410</span><span class="badge badge--lab">มีแล็บ</span></div>
+            <h4>วิทยาการข้อมูล</h4>
+            <div class="course-card__en">Data Science</div>
+            <p class="desc">กระบวนการเก็บ วิเคราะห์ และนำเสนอข้อมูลเพื่อสนับสนุนการตัดสินใจ</p>
+            <div class="course-card__credit">3 หน่วยกิต</div>
+          </div>
+          <div class="course-card">
+            <div class="course-card__top"><span class="badge mono">AI420</span></div>
+            <h4>การประมวลผลภาษาธรรมชาติ</h4>
+            <div class="course-card__en">Natural Language Processing</div>
+            <p class="desc">เทคนิคการประมวลผลและวิเคราะห์ภาษามนุษย์ด้วยคอมพิวเตอร์</p>
+            <div class="course-card__credit">3 หน่วยกิต</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SCHEDULE / STUDY PLAN ================= -->
+<section class="schedule" id="schedule">
+  <div class="container">
+
+    <div class="section-head reveal">
+      <span class="eyebrow">แผนการเรียน</span>
+      <h2>โครงสร้างหลักสูตร 4 ปี</h2>
+      <p>
+        แผนการเรียนสาขาวิชาวิทยาการคอมพิวเตอร์
+        ตั้งแต่ชั้นปีที่ 1 ถึงชั้นปีที่ 4
+      </p>
+    </div>
+
+
+    <!-- ================= TAB ================= -->
+    <div class="tabs" data-tabs="schedule">
+
+      <button class="is-active" data-tab-target="y12">
+        ปีที่ 1–2
+      </button>
+
+      <button data-tab-target="y34">
+        ปีที่ 3–4
+      </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         ปีที่ 1–2
+         ===================================================== -->
+
+    <div
+      class="tab-panel is-active"
+      data-tab-panel="y12"
+      data-tabs-group="schedule"
+    >
+
+      <div class="schedule__panels">
+
+
+        <!-- ================= YEAR 1 SEMESTER 1 ================= -->
+
+        <div class="plan-card reveal">
+
+          <div class="plan-card__head">
+            ชั้นปีที่ 1 - ภาคเรียนที่ 1
+          </div>
+
+          <table class="plan-table">
+
+            <thead>
+              <tr>
+                <th>รหัสวิชา</th>
+                <th>ชื่อรายวิชา</th>
+                <th>หมวดหมู่รายวิชา</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS101</strong>
+                </td>
+                <td>พื้นฐานวิทยาการคอมพิวเตอร์</td>
+                <td>
+                  <span class="tag">วิชาเฉพาะสาขา</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS102</strong>
+                </td>
+                <td>การเขียนโปรแกรมเบื้องต้น (Python)</td>
+                <td>
+                  <span class="tag">วิชาเฉพาะสาขา</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="code mono">
+                  <strong>MA111</strong>
+                </td>
+                <td>คณิตศาสตร์ดิสครีต</td>
+                <td>
+                  <span class="tag">วิชาเฉพาะสาขา</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="code mono">
+                  <strong>GE101</strong>
+                </td>
+                <td>ภาษาอังกฤษเพื่อการสื่อสาร</td>
+                <td>
+                  <span class="tag">วิชาศึกษาทั่วไป</span>
+                </td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+
+        <!-- ================= YEAR 1 SEMESTER 2 ================= -->
+
+        <div class="plan-card reveal">
+
+          <div class="plan-card__head">
+            ชั้นปีที่ 1 - ภาคเรียนที่ 2
+          </div>
+
+          <table class="plan-table">
+
+            <thead>
+              <tr>
+                <th>รหัสวิชา</th>
+                <th>ชื่อรายวิชา</th>
+                <th>หมวดหมู่รายวิชา</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS103</strong>
+                </td>
+                <td>การเขียนโปรแกรมเชิงวัตถุ (Java)</td>
+                <td>
+                  <span class="tag">วิชาเฉพาะสาขา</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS104</strong>
+                </td>
+                <td>โครงสร้างข้อมูลและอัลกอริทึม</td>
+                <td>
+                  <span class="tag">วิชาเฉพาะสาขา</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="code mono">
+                  <strong>MA112</strong>
+                </td>
+                <td>สถิติและคณิตศาสตร์สัญกรณ์</td>
+                <td>
+                  <span class="tag">วิชาเฉพาะสาขา</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="code mono">
+                  <strong>GE102</strong>
+                </td>
+                <td>ทักษะชีวิตและความเป็นพลเมือง</td>
+                <td>
+                  <span class="tag">วิชาศึกษาทั่วไป</span>
+                </td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+
+        <!-- ================= YEAR 2 SEMESTER 1 ================= -->
+
+        <div class="plan-card reveal">
+
+          <div class="plan-card__head">
+            ชั้นปีที่ 2 - ภาคเรียนที่ 1
+          </div>
+
+          <table class="plan-table">
+
+            <thead>
+              <tr>
+                <th>รหัสวิชา</th>
+                <th>ชื่อรายวิชา</th>
+                <th>หมวดหมู่รายวิชา</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS201</strong>
+                </td>
+                <td>สถาปัตยกรรมคอมพิวเตอร์และระบบปฏิบัติการ</td>
+                <td>
+                  <span class="tag">วิชาเฉพาะสาขา</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS202</strong>
+                </td>
+                <td>ระบบฐานข้อมูลและการออกแบบ</td>
+                <td>
+                  <span class="tag">วิชาเฉพาะสาขา</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS203</strong>
+                </td>
+                <td>วิศวกรรมซอฟต์แวร์เบื้องต้น</td>
+                <td>
+                  <span class="tag">วิชาเฉพาะสาขา</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS204</strong>
+                </td>
+                <td>โครงข่ายคอมพิวเตอร์และการสื่อสาร</td>
+                <td>
+                  <span class="tag">วิชาเฉพาะสาขา</span>
+                </td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+
+        <!-- ================= YEAR 2 SEMESTER 2 ================= -->
+
+        <div class="plan-card reveal">
+
+          <div class="plan-card__head">
+            ชั้นปีที่ 2 - ภาคเรียนที่ 2
+          </div>
+
+          <table class="plan-table">
+
+            <thead>
+              <tr>
+                <th>รหัสวิชา</th>
+                <th>ชื่อรายวิชา</th>
+                <th>หมวดหมู่รายวิชา</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS205</strong>
+                </td>
+                <td>การพัฒนาเว็บแอปพลิเคชัน</td>
+                <td>
+                  <span class="tag">วิชาเฉพาะสาขา</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS206</strong>
+                </td>
+                <td>การวิเคราะห์และออกแบบระบบเชิงวัตถุ</td>
+                <td>
+                  <span class="tag">วิชาเฉพาะสาขา</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS207</strong>
+                </td>
+                <td>ความมั่นคงปลอดภัยสารสนเทศพื้นฐาน</td>
+                <td>
+                  <span class="tag">วิชาเฉพาะสาขา</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS208</strong>
+                </td>
+                <td>คณิตศาสตร์และเครื่องมือสถิติสำหรับ AI</td>
+                <td>
+                  <span class="tag">วิชาเฉพาะสาขา</span>
+                </td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ปีที่ 3–4
+         ===================================================== -->
+
+    <div
+      class="tab-panel"
+      data-tab-panel="y34"
+      data-tabs-group="schedule"
+    >
+
+      <div class="schedule__panels">
+
+
+        <!-- ================= YEAR 3 SEMESTER 1 ================= -->
+
+        <div class="plan-card reveal">
+
+          <div class="plan-card__head">
+            ชั้นปีที่ 3 - ภาคเรียนที่ 1
+          </div>
+
+          <table class="plan-table">
+
+            <thead>
+              <tr>
+                <th>รหัสวิชา</th>
+                <th>ชื่อรายวิชา</th>
+                <th>หมวดหมู่รายวิชา</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS301</strong>
+                </td>
+                <td>ภูมิปัญญาประดิษฐ์เชิงทฤษฎีและการประยุกต์</td>
+                <td>
+                  <span class="tag">วิชาเฉพาะสาขา</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS302</strong>
+                </td>
+                <td>วิทยาการข้อมูลและการวิเคราะห์ Big Data</td>
+                <td>
+                  <span class="tag">วิชาเฉพาะสาขา</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS303</strong>
+                </td>
+                <td>ภูมิสารสนเทศศาสตร์เบื้องต้น</td>
+                <td>
+                  <span class="tag">วิชาเฉพาะสาขา</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS3XX</strong>
+                </td>
+                <td>วิชาเลือกเฉพาะทางสาขาวิชา (1)</td>
+                <td>
+                  <span class="tag">วิชาเลือกเฉพาะสาขา</span>
+                </td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+
+        <!-- ================= YEAR 3 SEMESTER 2 ================= -->
+
+        <div class="plan-card reveal">
+
+          <div class="plan-card__head">
+            ชั้นปีที่ 3 - ภาคเรียนที่ 2
+          </div>
+
+          <table class="plan-table">
+
+            <thead>
+              <tr>
+                <th>รหัสวิชา</th>
+                <th>ชื่อรายวิชา</th>
+                <th>หมวดหมู่รายวิชา</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS304</strong>
+                </td>
+                <td>การเตรียมพร้อมฝึกประสบการณ์วิชาชีพ</td>
+                <td>
+                  <span class="tag">วิชาฝึกทักษะ</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS305</strong>
+                </td>
+                <td>โครงงานวิทยาการคอมพิวเตอร์ 1</td>
+                <td>
+                  <span class="tag">วิชาทำโครงการ</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS3XX</strong>
+                </td>
+                <td>วิชาเลือกเฉพาะทางสาขาวิชา (2)</td>
+                <td>
+                  <span class="tag">วิชาเลือกเฉพาะสาขา</span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS3XX</strong>
+                </td>
+                <td>วิชาเลือกเสรีองค์กรไอที</td>
+                <td>
+                  <span class="tag">วิชาเลือกเสรี</span>
+                </td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+
+        <!-- ================= YEAR 4 SEMESTER 1 ================= -->
+
+        <div class="plan-card reveal">
+
+          <div class="plan-card__head">
+            ชั้นปีที่ 4 - ภาคเรียนที่ 1
+          </div>
+
+          <table class="plan-table">
+
+            <thead>
+              <tr>
+                <th>รหัสวิชา</th>
+                <th>ชื่อรายวิชา</th>
+                <th>หมวดหมู่รายวิชา</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS401</strong>
+                </td>
+
+                <td>
+                  สหกิจศึกษาทางวิทยาการคอมพิวเตอร์ /
+                  การฝึกประสบการณ์
+                </td>
+
+                <td>
+                  <span class="tag">
+                    ปฏิบัติงานในสถานประกอบการ
+                  </span>
+                </td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+
+        <!-- ================= YEAR 4 SEMESTER 2 ================= -->
+
+        <div class="plan-card reveal">
+
+          <div class="plan-card__head">
+            ชั้นปีที่ 4 - ภาคเรียนที่ 2
+          </div>
+
+          <table class="plan-table">
+
+            <thead>
+              <tr>
+                <th>รหัสวิชา</th>
+                <th>ชื่อรายวิชา</th>
+                <th>หมวดหมู่รายวิชา</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS402</strong>
+                </td>
+
+                <td>
+                  สัมมนาและเทคโนโลยีไอทีเกิดใหม่
+                </td>
+
+                <td>
+                  <span class="tag">
+                    สัมมนาทัศนคติ
+                  </span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="code mono">
+                  <strong>CS403</strong>
+                </td>
+
+                <td>
+                  โครงงานวิทยาการคอมพิวเตอร์ 2
+                  (จบการศึกษา)
+                </td>
+
+                <td>
+                  <span class="tag">
+                    วิชาทำโครงการ
+                  </span>
+                </td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+  <!-- ================= FACULTY ================= -->
+<section class="faculty on-ink" id="faculty">
+
+  <div class="container">
+
+    <div class="section-head reveal">
+      <span class="eyebrow">คณาจารย์</span>
+
+      <h2>อาจารย์ผู้รับผิดชอบหลักสูตร</h2>
+
+      <p>
+        คณาจารย์ผู้เชี่ยวชาญด้านวิทยาการคอมพิวเตอร์
+        วิศวกรรมคอมพิวเตอร์ และเทคโนโลยีสารสนเทศ
+      </p>
+    </div>
+
+
+    <div class="faculty-grid">
+
+
+      <!-- ================= อาจารย์คนที่ 1 ================= -->
+      <div class="faculty-card reveal">
+
+        {% load static %}
+
+<div class="avatar">
+    <img 
+    src="{% static 'image/jessada_p.webp' %}"
+    alt="ผู้ช่วยศาสตราจารย์ ดร.เจษฎา โพนแก้ว"
+>
+</div>
+
+        <h4>
+          ผู้ช่วยศาสตราจารย์ ดร.เจษฎา โพนแก้ว
+        </h4>
+
+        <div class="faculty-name-en">
+          Jessada Phonkaew
+        </div>
+
+        <div class="role">
+          อาจารย์ผู้รับผิดชอบหลักสูตร
+        </div>
+
+        <div class="expertise">
+          วิทยาการคอมพิวเตอร์
+        </div>
+
+      </div>
+
+
+      <!-- ================= อาจารย์คนที่ 2 ================= -->
+      <div class="faculty-card reveal">
+
+        <div class="avatar">
+    <img 
+        src="{% static 'image/jessada_c.webp' %}"
+        alt="ดร.เจษฎา ชาตรี"
+    >
+</div>
+
+        <h4>
+          ดร.เจษฎา ชาตรี
+        </h4>
+
+        <div class="faculty-name-en">
+          Jessada Chatree
+        </div>
+
+        <div class="role">
+          อาจารย์ผู้รับผิดชอบหลักสูตร
+        </div>
+
+        <div class="expertise">
+          Computer Science and Engineering
+        </div>
+
+      </div>
+
+
+      <!-- ================= อาจารย์คนที่ 3 ================= -->
+      <div class="faculty-card reveal">
+
+        <div class="avatar">
+    <img 
+        src="{% static 'image/krichbodin.webp' %}"
+        alt="ดร.กริชบดินทร์ ผิวหอม"
+    >
+</div>
+
+        <h4>
+          ดร.กริชบดินทร์ ผิวหอม
+        </h4>
+
+        <div class="faculty-name-en">
+          Krichbodin Phewhom
+        </div>
+
+        <div class="role">
+          อาจารย์ผู้รับผิดชอบหลักสูตร
+        </div>
+
+        <div class="expertise">
+          วิศวกรรมคอมพิวเตอร์
+        </div>
+
+      </div>
+
+
+      <!-- ================= อาจารย์คนที่ 4 ================= -->
+      <div class="faculty-card reveal">
+
+        <div class="avatar">
+    <img 
+        src="{% static 'image/phisan.webp' %}"
+        alt="ผู้ช่วยศาสตราจารย์พิศาล สุขขี"
+    >
+</div>
+
+
+        <h4>
+          ผู้ช่วยศาสตราจารย์พิศาล สุขขี
+        </h4>
+
+        <div class="faculty-name-en">
+          Phisan Sukkee
+        </div>
+
+        <div class="role">
+          อาจารย์ผู้รับผิดชอบหลักสูตร
+        </div>
+
+        <div class="expertise">
+          วิทยาการคอมพิวเตอร์
+        </div>
+
+      </div>
+
+
+      <!-- ================= อาจารย์คนที่ 5 ================= -->
+      <div class="faculty-card reveal">
+
+       <div class="avatar">
+    <img 
+        src="{% static 'image/kanittha.webp' %}"
+        alt="ผู้ช่วยศาสตราจารย์ ดร.กนิษฐา อินธิชิต"
+    >
+</div>
+
+        <h4>
+          ผู้ช่วยศาสตราจารย์ ดร.กนิษฐา อินธิชิต
+        </h4>
+
+        <div class="faculty-name-en">
+          Kanittha Inthichit
+        </div>
+
+        <div class="role">
+          อาจารย์ผู้รับผิดชอบหลักสูตร
+          <br>
+          หัวหน้าสาขาวิชาฯ
+        </div>
+
+        <div class="expertise">
+          เทคโนโลยีสารสนเทศ
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+ <!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+
+  <style>
+    /* ================= CONTACT LAYOUT ================= */
+
+    .contact__grid {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+      gap: 40px !important;
+      align-items: start !important;
+      width: 100%;
+    }
+
+    /* ซ้าย - ข้อมูลติดต่อ */
+    .contact__info-column {
+      width: 100%;
+      min-width: 0;
+    }
+
+    /* ขวา - แผนที่ */
+    .contact__map-column {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .contact__map-column .map-container {
+      width: 100% !important;
+      height: 450px !important;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .contact__map-column iframe {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+      border: 0;
+    }
+
+    /* Social */
+    .contact__info-column .social-row {
+      margin-top: 24px;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 768px) {
+
+      .contact__grid {
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+      }
+
+      .contact__map-column .map-container {
+        height: 350px !important;
+      }
+
+    }
+  </style>
+
+
+  <div class="container">
+
+    <!-- ================= SECTION HEAD ================= -->
+
+    <div class="section-head reveal">
+
+      <span class="eyebrow">ติดต่อเรา</span>
+
+      <h2>ติดต่อสาขาวิชาวิทยาการคอมพิวเตอร์</h2>
+
+      <p>
+        หากมีข้อสงสัยเกี่ยวกับหลักสูตร การรับสมัคร
+        หรือข้อมูลการศึกษา สามารถติดต่อสาขาวิชาฯ ได้ตามช่องทางด้านล่าง
+      </p>
+
+    </div>
+
+
+    <!-- ================= TWO COLUMNS ================= -->
+
+    <div class="contact__grid">
+
+
+      <!-- ================================================= -->
+      <!-- LEFT : CONTACT INFORMATION -->
+      <!-- ================================================= -->
+
+      <div class="contact__info-column reveal">
+
+        <div class="contact-info">
+
+
+          <!-- ================= เบอร์โทร ================= -->
+
+          <div class="contact-info__item">
+
+            <div class="contact-info__icon">
+
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+
+                <path d="M22 16.9v3a2 2 0 0 1-2.2 2
+                19.8 19.8 0 0 1-8.6-3.1
+                19.5 19.5 0 0 1-6-6
+                A19.8 19.8 0 0 1 2.1 4.2
+                2 2 0 0 1 4.1 2h3
+                a2 2 0 0 1 2 1.7
+                c.1.9.3 1.8.6 2.7
+                a2 2 0 0 1-.4 2.1L8 9.9
+                a16 16 0 0 0 6 6l1.4-1.4
+                a2 2 0 0 1 2.1-.4
+                c.9.3 1.8.5 2.7.6
+                a2 2 0 0 1 1.8 2.2Z"/>
+
+              </svg>
+
+            </div>
+
+            <div>
+
+              <h4>เบอร์โทรติดต่อสาขาวิชาฯ</h4>
+
+              <p>
+                043-009700 ต่อ 50528
+              </p>
+
+              <p>
+                สายด่วน: 084-298-2456
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- ================= อีเมล ================= -->
+
+          <div class="contact-info__item">
+
+            <div class="contact-info__icon">
+
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+
+                <path d="M4 4h16v16H4z"/>
+                <path d="m4 6 8 7 8-7"/>
+
+              </svg>
+
+            </div>
+
+            <div>
+
+              <h4>อีเมลติดต่อสาขาวิชาฯ</h4>
+
+              <p>
+
+                <a
+                  href="mailto:phisan.s@sskru.ac.th"
+                  style="color:inherit; text-decoration:none;"
+                >
+                  phisan.s@sskru.ac.th
+                </a>
+
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- ================= หัวหน้าสาขา ================= -->
+
+          <div class="contact-info__item">
+
+            <div class="contact-info__icon">
+
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+
+                <circle cx="12" cy="8" r="4"/>
+
+                <path
+                  d="M4 21c0-4 3.5-7 8-7s8 3 8 7"
+                />
+
+              </svg>
+
+            </div>
+
+            <div>
+
+              <h4>หัวหน้าสาขาวิชาฯ</h4>
+
+              <p>
+                ผศ.ดร.กนิษฐา อินธิชิต
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- ================= ที่ตั้ง ================= -->
+
+          <div class="contact-info__item">
+
+            <div class="contact-info__icon">
+
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+
+                <path
+                  d="M21 10c0 6-9 12-9 12
+                  S3 16 3 10a9 9 0 0 1 18 0Z"
+                />
+
+                <circle
+                  cx="12"
+                  cy="10"
+                  r="3"
+                />
+
+              </svg>
+
+            </div>
+
+            <div>
+
+              <h4>ที่ตั้งอาคารเรียน</h4>
+
+              <p>
+                สาขาวิชาฯ ตั้งอยู่ที่ชั้น 5
+                อาคารสำนักงานคณบดี
+                คณะศิลปศาสตร์และวิทยาศาสตร์ (LASC)
+              </p>
+
+              <p>
+                มรภ.ศรีสะเกษ ถ.ไทยพันทา
+                อ.เมือง จ.ศรีสะเกษ
+              </p>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- SOCIAL MEDIA -->
+        <!-- ================================================= -->
+
+        <div class="social-row">
+
+
+          <!-- LINE -->
+
+          <a
+            href="https://line.me/R/ti/p/@793ozxpi?oat_content=url&ts=05271601"
+            aria-label="LINE"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+
+              <path
+                d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5
+                9 9 0 0 1-4-1L3 20l1-5.5
+                a8.38 8.38 0 0 1-1-4
+                8.38 8.38 0 0 1 8.5-8.5
+                8.5 8.5 0 0 1 9.5 9.5z"
+              />
+
+            </svg>
+
+          </a>
+
+
+          <!-- Facebook -->
+
+          <a
+            href="https://www.facebook.com/comsci.sskru"
+            aria-label="Facebook"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+
+              <path
+                d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7
+                a1 1 0 0 1 1-1h3z"
+              />
+
+            </svg>
+
+          </a>
+
+
+          <!-- TikTok -->
+
+          <a
+            href="https://www.tiktok.com/@comsciencesskru"
+            aria-label="TikTok"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+
+              <path
+                d="M9 12a4 4 0 1 0 4 4V4
+                a5 5 0 0 0 5 5"
+              />
+
+            </svg>
+
+          </a>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ================================================= -->
+      <!-- RIGHT : GOOGLE MAP -->
+      <!-- ================================================= -->
+
+      <div class="contact__map-column reveal">
+
+        <div class="map-container">
+
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.123456789!2d104.333333!3d15.116666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3116e345ffdbda1d%3A0xa98fedd9d438f097!2z4Lij4Lix4LiU4Lij4Li04LiZ4Liy4LiZ4Li04LiB4Lij4Li04LiZ4Li04LiB4Lij4LiZ4Li04LiB4Lij4LiZ4Li04LiB4Lij4LiZ4Li04LiB!5e0!3m2!1sth!2sth!4v1699999999999!5m2!1sth!2sth"
+            width="100%"
+            height="450"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          >
+          </iframe>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <div class="footer__brand">CS<span>.</span> สาขาวิชาวิทยาการคอมพิวเตอร์</div>
+          <p style="max-width:38ch; font-size:0.9rem;">
+            มุ่งผลิตบัณฑิตที่มีความเชี่ยวชาญด้านเทคโนโลยี พร้อมคุณธรรมและจิตสำนึกต่อสังคม
+          </p>
+        </div>
+        <div>
+          <h5>ลิงก์ด่วน</h5>
+          <ul>
+            <li><a href="#about">เกี่ยวกับเรา</a></li>
+            <li><a href="#courses">หลักสูตร</a></li>
+            <li><a href="#schedule">แผนการเรียน</a></li>
+            <li><a href="#faculty">คณาจารย์</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>ติดต่อ</h5>
+          <ul>
+            <li>phisan.s@sskru.ac.th</li>
+            <li>084-298-2456</li>
+            <li>จันทร์–ศุกร์ 08:30–16:30</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 สาขาวิชาวิทยาการคอมพิวเตอร์. All rights reserved.</span>
+        <span>ออกแบบและพัฒนาโดยทีมนักศึกษาสาขาวิชาฯ</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{% static 'js/home.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

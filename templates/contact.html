@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact - SB Admin{% endblock %}
+
+{% block content %}
+<h1 class="mt-4">Contact</h1>
+<ol class="breadcrumb mb-4">
+  <li class="breadcrumb-item"><a href="{% url 'app1:home' %}">Home</a></li>
+  <li class="breadcrumb-item active">Contact</li>
+</ol>
+
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function handleContactSubmit(event) {
+        event.preventDefault();
+        document.getElementById('contactAlert').classList.remove('d-none');
+        document.getElementById('contactForm').reset();
+        setTimeout(function() {
+            document.getElementById('contactAlert').classList.add('d-none');
+        }, 5000);
+    }
+</script>
+{% endblock %}

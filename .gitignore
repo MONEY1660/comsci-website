@@ -1,0 +1,12 @@
+*.pyc
+__pycache__/
+*.sqlite3
+.env
+.env.local
+.env.*
+!.env.example
+.venv/
+env/
+media/*
+!media/.gitkeep
+
