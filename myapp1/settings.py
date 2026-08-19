@@ -42,7 +42,7 @@ load_environment_variables()
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-development-key-change-this-in-production')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY') or 'django-insecure-development-key-change-this-in-production'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() in ('1', 'true', 'yes', 'on')
