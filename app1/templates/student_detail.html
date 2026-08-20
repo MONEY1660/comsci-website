@@ -952,12 +952,13 @@ body {
                 <img
                     src="{{ student.image.url }}"
                     alt="{{ student.first_name }} {{ student.last_name }}"
+                    onerror="this.onerror=null; this.src='{% static 'image/default_avatar.svg' %}';"
                 >
 
             {% else %}
 
                 <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrb4OvIZOz-Z2RvlJ0xDl1E_e3qOfh_TQK1va1Z7gJ4g&s=10"
+                    src="{% static 'image/default_avatar.svg' %}"
                     alt="ไม่มีรูปนักศึกษา"
                 >
 

@@ -512,6 +512,10 @@
                                 </th>
 
                                 <th>
+                                    รูปภาพ
+                                </th>
+
+                                <th>
                                     รหัสนักศึกษา
                                 </th>
 
@@ -544,6 +548,14 @@
 
                                 <td class="student-number">
                                     {{ forloop.counter }}
+                                </td>
+
+                                <td>
+                                    {% if student.image %}
+                                        <img src="{{ student.image.url }}" alt="{{ student.first_name }}" onerror="this.onerror=null; this.src='{% static 'image/default_avatar.svg' %}';" style="width: 42px; height: 42px; object-fit: cover; border-radius: 50%; border: 2px solid rgba(198,255,61,0.5); vertical-align: middle;">
+                                    {% else %}
+                                        <img src="{% static 'image/default_avatar.svg' %}" alt="รูปนักศึกษา" style="width: 42px; height: 42px; object-fit: cover; border-radius: 50%; border: 2px solid rgba(198,255,61,0.5); vertical-align: middle;">
+                                    {% endif %}
                                 </td>
 
                                 <td>
@@ -582,7 +594,7 @@
                             <tr>
 
                                 <td
-                                    colspan="6"
+                                    colspan="7"
                                     class="empty-student"
                                 >
                                     ยังไม่มีข้อมูลนักศึกษาชั้นปีที่ 1
@@ -635,6 +647,8 @@
 
                                 <th>#</th>
 
+                                <th>รูปภาพ</th>
+
                                 <th>รหัสนักศึกษา</th>
 
                                 <th>คำนำหน้า</th>
@@ -658,6 +672,14 @@
 
                                 <td class="student-number">
                                     {{ forloop.counter }}
+                                </td>
+
+                                <td>
+                                    {% if student.image %}
+                                        <img src="{{ student.image.url }}" alt="{{ student.first_name }}" onerror="this.onerror=null; this.src='{% static 'image/default_avatar.svg' %}';" style="width: 42px; height: 42px; object-fit: cover; border-radius: 50%; border: 2px solid rgba(198,255,61,0.5); vertical-align: middle;">
+                                    {% else %}
+                                        <img src="{% static 'image/default_avatar.svg' %}" alt="รูปนักศึกษา" style="width: 42px; height: 42px; object-fit: cover; border-radius: 50%; border: 2px solid rgba(198,255,61,0.5); vertical-align: middle;">
+                                    {% endif %}
                                 </td>
 
                                 <td>
@@ -696,7 +718,7 @@
                             <tr>
 
                                 <td
-                                    colspan="6"
+                                    colspan="7"
                                     class="empty-student"
                                 >
                                     ยังไม่มีข้อมูลนักศึกษาชั้นปีที่ 2
@@ -749,6 +771,8 @@
 
                                 <th>#</th>
 
+                                <th>รูปภาพ</th>
+
                                 <th>รหัสนักศึกษา</th>
 
                                 <th>คำนำหน้า</th>
@@ -772,6 +796,14 @@
 
                                 <td class="student-number">
                                     {{ forloop.counter }}
+                                </td>
+
+                                <td>
+                                    {% if student.image %}
+                                        <img src="{{ student.image.url }}" alt="{{ student.first_name }}" onerror="this.onerror=null; this.src='{% static 'image/default_avatar.svg' %}';" style="width: 42px; height: 42px; object-fit: cover; border-radius: 50%; border: 2px solid rgba(198,255,61,0.5); vertical-align: middle;">
+                                    {% else %}
+                                        <img src="{% static 'image/default_avatar.svg' %}" alt="รูปนักศึกษา" style="width: 42px; height: 42px; object-fit: cover; border-radius: 50%; border: 2px solid rgba(198,255,61,0.5); vertical-align: middle;">
+                                    {% endif %}
                                 </td>
 
                                 <td>
@@ -810,7 +842,7 @@
                             <tr>
 
                                 <td
-                                    colspan="6"
+                                    colspan="7"
                                     class="empty-student"
                                 >
                                     ยังไม่มีข้อมูลนักศึกษาชั้นปีที่ 3
@@ -863,6 +895,8 @@
 
                                 <th>#</th>
 
+                                <th>รูปภาพ</th>
+
                                 <th>รหัสนักศึกษา</th>
 
                                 <th>คำนำหน้า</th>
@@ -886,6 +920,14 @@
 
                                 <td class="student-number">
                                     {{ forloop.counter }}
+                                </td>
+
+                                <td>
+                                    {% if student.image %}
+                                        <img src="{{ student.image.url }}" alt="{{ student.first_name }}" onerror="this.onerror=null; this.src='{% static 'image/default_avatar.svg' %}';" style="width: 42px; height: 42px; object-fit: cover; border-radius: 50%; border: 2px solid rgba(198,255,61,0.5); vertical-align: middle;">
+                                    {% else %}
+                                        <img src="{% static 'image/default_avatar.svg' %}" alt="รูปนักศึกษา" style="width: 42px; height: 42px; object-fit: cover; border-radius: 50%; border: 2px solid rgba(198,255,61,0.5); vertical-align: middle;">
+                                    {% endif %}
                                 </td>
 
                                 <td>
@@ -924,7 +966,7 @@
                             <tr>
 
                                 <td
-                                    colspan="6"
+                                    colspan="7"
                                     class="empty-student"
                                 >
                                     ยังไม่มีข้อมูลนักศึกษาชั้นปีที่ 4

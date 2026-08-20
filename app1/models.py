@@ -34,6 +34,12 @@ class Student(models.Model):
     def get_full_name(self):
         return f"{self.prefix_name} {self.first_name} {self.last_name}".strip()
 
+    @property
+    def get_image_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        return '/static/image/default_avatar.svg'
+
 
 class Student1(models.Model):
     PREFIX_CHOICES = [
@@ -53,6 +59,12 @@ class Student1(models.Model):
     
     def get_full_name(self):
         return f"{self.prefix_name} {self.first_name} {self.last_name}".strip()
+
+    @property
+    def get_image_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        return '/static/image/default_avatar.svg'
 
 
 class Student3(models.Model):
@@ -74,6 +86,12 @@ class Student3(models.Model):
     def get_full_name(self):
         return f"{self.prefix_name} {self.first_name} {self.last_name}".strip()
 
+    @property
+    def get_image_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        return '/static/image/default_avatar.svg'
+
 
 class Student4(models.Model):
     PREFIX_CHOICES = [
@@ -93,3 +111,9 @@ class Student4(models.Model):
 
     def get_full_name(self):
         return f"{self.prefix_name} {self.first_name} {self.last_name}".strip()
+
+    @property
+    def get_image_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url
+        return '/static/image/default_avatar.svg'

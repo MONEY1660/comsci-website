@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Dashboard - SB Admin{% endblock %}
 
@@ -7,10 +8,11 @@
 <ol class="breadcrumb mb-4">
   <li class="breadcrumb-item active">My Home Page {{ date|date:"M. j, Y" }}</li>
 </ol>
-<table class="table table-striped">
+<table class="table table-striped align-middle">
   <thead>
     <tr>
       <th scope="col">#</th>
+      <th scope="col">Photo</th>
       <th scope="col">ID</th>
       <th scope="col">Prefix</th>
       <th scope="col">First</th>
@@ -22,7 +24,14 @@
     {% for student in students %}
     <tr>
       <th scope="row">{{ forloop.counter }}</th>
-      <td><a href="{% url 'app1:student_detail' pk=student.pk %}">{{ student.st_id }}</a></td>
+      <td>
+        {% if student.image %}
+          <img src="{{ student.image.url }}" alt="{{ student.first_name }}" onerror="this.onerror=null; this.src='{% static 'image/default_avatar.svg' %}';" style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%; border: 2px solid rgba(198,255,61,0.5); vertical-align: middle;">
+        {% else %}
+          <img src="{% static 'image/default_avatar.svg' %}" alt="Student Photo" style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%; border: 2px solid rgba(255,255,255,0.15); vertical-align: middle;">
+        {% endif %}
+      </td>
+      <td><a href="{% url 'app1:student_detail2' pk=student.st_id %}">{{ student.st_id }}</a></td>
       <td>{{ student.prefix_name|default:"" }}</td>
       <td>{{ student.first_name }}</td>
       <td>{{ student.last_name }}</td>
@@ -30,7 +39,7 @@
     </tr>
     {% empty %}
     <tr>
-      <td colspan="5" class="text-center py-4 text-muted">No student records found.</td>
+      <td colspan="7" class="text-center py-4 text-muted">No student records found.</td>
     </tr>
     {% endfor %}
   </tbody>
